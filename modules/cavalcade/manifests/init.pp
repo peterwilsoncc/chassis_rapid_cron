@@ -36,7 +36,7 @@ class cavalcade (
 		$present = present
 	}
 
-	if versioncmp($::operatingsystemmajrelease, '15.04') >= 0 {
+	if versioncmp($facts['os']['distro']['release']['full'], '15.04') >= 0 {
 		exec { 'systemctl enable cavalcade':
 			command     => '/bin/systemctl enable cavalcade',
 			refreshonly => true
