@@ -1,5 +1,5 @@
 [Unit]
-Description=CavalcadeRunner
+Description=RapidCronRunner
 
 [Service]
 TimeoutStartSec=0
@@ -8,7 +8,7 @@ Restart=on-failure
 RestartSec=30s
 WorkingDirectory=<%= @wproot %>
 User=www-data
-ExecStart=<%= @path %>/runner/bin/cavalcade
+ExecStart=<%= @path %>/runner/bin/runner
 
 [Install]
 WantedBy=vagrant.mount

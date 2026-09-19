@@ -1,40 +1,23 @@
-# Cavalcade for Chassis
+# Rapid Cron for Chassis
 
-This is an [extension for Chassis](http://docs.chassis.io/en/latest/extend/) to enable [Cavalcade](https://github.com/humanmade/Cavalcade).
-
-Cavalcade is a replacement for WordPress' built-in cron that runs as a daemon on your system. It horizontally scales in production to ensure your scheduled tasks keep up with the scale of your site.
-
-This extension sets up the Cavalcade Runner as a daemon on your system to allow you to replicate production much more easily.
 
 ## Installation
-
-This extension can be installed the same as any other Chassis extension:
-
-```
-# Clone this repository into your Chassis `extensions` directory:
-cd extensions
-git clone --recursive git@github.com:Chassis/Cavalcade.git cavalcade
-
-# Re-provision your Chassis box
-cd ..
-vagrant provision
-```
 
 Alternatively you can add the following to one of your [configuration](http://docs.chassis.io/en/latest/config/#configuration) files.
 ```
 extensions:
-    - chassis/cavalcade
+    - peterwilsoncc/chassis_rapid_cron
 
 synced_folders:
     logs/upstart: /var/log/upstart
 ```
 
-You can monitor the Cavalcade Runner by SSHing into your box, then viewing the `/var/log/upstart/cavalcade.log` file. To view it live, simply run `sudo tail -f /var/log/upstart/cavalcade.log`
+You can monitor the Rapid Cron Runner by SSHing into your box, then viewing the `/var/log/upstart/rapid-cron.log` file. To view it live, simply run `sudo tail -f /var/log/upstart/rapid-cron.log`
 
 ## Troubleshooting
 
-### Cavalcade isn't running!
+### Rapid Cron isn't running!
 
-If Cavalcade doesn't appear to be running, check `/var/log/syslog` and look for errors with "cavalcade". You can also check the Cavalcade log at `/var/log/upstart/cavalcade.log` for more information.
+If Rapid Cron doesn't appear to be running, check `/var/log/syslog` and look for errors with "rapid-cron". You can also check the Rapdi Cron log at `/var/log/upstart/rapid-cron.log` for more information.
 
-If you see "cavalcade respawning too fast, stopped", this typically means that your Cavalcade jobs table hasn't been created. Make sure you have Cavalcade installed as an MU plugin on your site, then visit your site to ensure Cavalcade creates this table.
+If you see "rapid cron respawning too fast, stopped", this typically means that your Rapid Cron jobs table hasn't been created. Make sure you have Rapid Cron installed as an MU plugin on your site, then visit your site to ensure Rapid Cron creates this table.

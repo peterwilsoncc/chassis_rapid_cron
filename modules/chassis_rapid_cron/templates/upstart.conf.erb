@@ -1,0 +1,12 @@
+description "Rapid Cron Daemon"
+author "Human Made and Peter Wilson"
+
+start on startup
+stop on shutdown
+respawn
+
+chdir <%= @wproot %>
+setuid www-data
+script
+  exec <%= @path %>/runner/bin/runner
+end script
