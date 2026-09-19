@@ -1,5 +1,5 @@
 # Rapid Cron is a replacement for WordPress' built-in cron that runs as a daemon on your system
-class rapid_cron (
+class chassis_rapid_cron (
 	$config
 ) {
 	# Set up variables for our templates.
@@ -43,7 +43,7 @@ class rapid_cron (
 		}
 		file { '/lib/systemd/system/rapid-cron.service':
 			ensure  => $file,
-			content => template('rapid-cron/systemd.service.erb'),
+			content => template('chassis_rapid_cron/systemd.service.erb'),
 			notify  => [
 				Exec['systemctl-daemon-reload'],
 				Exec['systemctl enable rapid-cron'],
@@ -53,14 +53,14 @@ class rapid_cron (
 	} else {
 		file { '/etc/init/rapid-cron.conf':
 			ensure  => $file,
-			content => template('rapid-cron/upstart.conf.erb'),
+			content => template('chassis_rapid_cron/upstart.conf.erb'),
 		}
 		File['/etc/init/rapid-cron.conf'] -> Service['rapid-cron']
 	}
 
 	file { "/etc/${php_dir}/mods-available/rapid-cron.ini":
 		ensure  => $present,
-		content => template('rapid-cron/rapid-cron.ini.erb'),
+		content => template('chassis_rapid_cron/rapid-cron.ini.erb'),
 		owner   => 'root',
 		group   => 'root',
 		mode    => '0644',
@@ -88,13 +88,13 @@ class rapid_cron (
 
 	file { '/etc/rsyslog.d/rapid-cron.conf':
 		ensure  => $present,
-		content => template('rapid-cron/rapid-cron.conf.erb'),
+		content => template('chassis_rapid_cron/rapid-cron.conf.erb'),
 		owner   => 'root',
 		group   => 'root',
 		mode    => '0644'
 	}
 
-	if ( ! empty( $::config[disabled_extensions] ) and 'chassis/rapid-cron' in $config[disabled_extensions] ) {
+	if ( ! empty( $::config[disabled_extensions] ) and 'chassis/chassis_rapid_cron' in $config[disabled_extensions] ) {
 		service { 'rapid-cron':
 			ensure    => stopped,
 			enable    => false,
